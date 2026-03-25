@@ -26,9 +26,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PutMapping("/{id}")
-    public userDto updateUser(@PathVariable Long id,@RequestBody userDto dto){
-        return userService.updateUser(id,dto);
+    @PutMapping("/update/{id}")
+    public void updateUser(@PathVariable Long id,@RequestBody UserDTO dto){
+         userService.updateUser(id,dto);
     }
 
     @DeleteMapping("/{id}")

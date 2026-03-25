@@ -46,7 +46,7 @@ public class userServiceImpl implements userService {
     }
 
     @Override
-    public userDto updateUser(Long id, userDto dto) {
+    public void updateUser(Long id, UserDTO dto) {
 
         User entity = userRepository.findById(id).orElseThrow();
 
@@ -62,10 +62,6 @@ public class userServiceImpl implements userService {
 
         userRepository.save(entity);
 
-        dto.setId(entity.getId());
-        dto.setPassword(null);
-
-        return dto;
     }
 
     @Override
