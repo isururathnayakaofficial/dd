@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.StaffDTO;
 import org.example.backend.dto.impl.staffDto;
 import org.example.backend.service.staffService;
 import org.springframework.web.bind.annotation.*;
@@ -8,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/staff")
+@RequestMapping("/api/staff")
 @RequiredArgsConstructor
 @CrossOrigin
 public class staffController {
 
     private final staffService staffService;
 
-    @PostMapping
-    public staffDto saveStaff(@RequestBody staffDto dto){
-        return staffService.saveStaff(dto);
+    @PostMapping("/save")
+    public void saveStaff(@RequestBody StaffDTO dto){
+        staffService.saveStaff(dto);
     }
 
     @GetMapping
@@ -25,9 +26,9 @@ public class staffController {
         return staffService.getAllStaff();
     }
 
-    @PutMapping("/{id}")
-    public staffDto updateStaff(@PathVariable Long id,@RequestBody staffDto dto){
-        return staffService.updateStaff(id,dto);
+    @PutMapping("/update/{id}")
+    public void updateStaff(@PathVariable Long id,@RequestBody StaffDTO dto){
+       staffService.updateStaff(id,dto);
     }
 
     @DeleteMapping("/{id}")

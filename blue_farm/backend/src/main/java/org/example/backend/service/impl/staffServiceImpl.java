@@ -1,6 +1,7 @@
 package org.example.backend.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.StaffDTO;
 import org.example.backend.dto.impl.staffDto;
 import org.example.backend.entity.impl.staffEntity;
 import org.example.backend.repository.staffRepo;
@@ -17,7 +18,7 @@ public class staffServiceImpl implements staffService {
     private final staffRepo staffRepository;
 
     @Override
-    public staffDto saveStaff(staffDto dto) {
+    public void saveStaff(StaffDTO dto) {
 
         staffEntity entity = new staffEntity();
         entity.setName(dto.getName());
@@ -27,9 +28,6 @@ public class staffServiceImpl implements staffService {
 
         staffRepository.save(entity);
 
-        dto.setId(entity.getId());
-
-        return dto;
     }
 
     @Override
@@ -50,7 +48,7 @@ public class staffServiceImpl implements staffService {
     }
 
     @Override
-    public staffDto updateStaff(Long id, staffDto dto) {
+    public void updateStaff(Long id, StaffDTO dto) {
 
         staffEntity entity = staffRepository.findById(id).orElseThrow();
 
@@ -61,9 +59,9 @@ public class staffServiceImpl implements staffService {
 
         staffRepository.save(entity);
 
-        dto.setId(entity.getId());
 
-        return dto;
+
+
     }
 
     @Override
