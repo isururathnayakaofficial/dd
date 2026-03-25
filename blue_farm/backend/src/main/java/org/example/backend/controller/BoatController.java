@@ -35,7 +35,7 @@ public class BoatController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteBoat(@PathVariable Long id){
         boatService.deleteBoat(id);
     }
