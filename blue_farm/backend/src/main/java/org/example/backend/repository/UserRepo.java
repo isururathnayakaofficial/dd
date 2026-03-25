@@ -1,13 +1,13 @@
 package org.example.backend.repository;
 
-import org.example.backend.entity.impl.userEntity;
+import org.example.backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface userRepo extends JpaRepository<userEntity, Long> {
+public interface UserRepo extends JpaRepository<User, Long> {
 
-    Optional<userEntity> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
     boolean existsByUsername(String username);
 }

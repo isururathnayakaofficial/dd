@@ -1,9 +1,11 @@
 package org.example.backend.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.UserDTO;
 import org.example.backend.dto.impl.userDto;
+import org.example.backend.entity.User;
 import org.example.backend.entity.impl.userEntity;
-import org.example.backend.repository.userRepo;
+import org.example.backend.repository.UserRepo;
 import org.example.backend.service.userService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,22 +17,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class userServiceImpl implements userService {
 
-    private final userRepo userRepository;
+    private final UserRepo userRepository;
     private final PasswordEncoder passwordEncoder;
     @Override
-    public userDto saveUser(userDto dto) {
+    public void  saveUser(UserDTO dto) {
 
-        userEntity entity = new userEntity();
+        User entity = new User();
         entity.setUsername(dto.getUsername());
         entity.setPassword(passwordEncoder.encode(dto.getPassword()));
         entity.setRole(dto.getRole() != null ? dto.getRole() : "USER");
 
         userRepository.save(entity);
-
-        dto.setId(entity.getId());
-        dto.setPassword(null);
-
-        return dto;
     }
 
     @Override
@@ -51,7 +48,7 @@ public class userServiceImpl implements userService {
     @Override
     public userDto updateUser(Long id, userDto dto) {
 
-        userEntity entity = userRepository.findById(id).orElseThrow();
+        User entity = userRepository.findById(id).orElseThrow();
 
         entity.setUsername(dto.getUsername());
 

@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.UserDTO;
 import org.example.backend.dto.impl.userDto;
 import org.example.backend.service.userService;
 import org.springframework.web.bind.annotation.*;
@@ -8,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 @CrossOrigin
-public class userController {
+public class UserController {
 
     private final userService userService;
 
-    @PostMapping
-    public userDto saveUser(@RequestBody userDto dto){
-        return userService.saveUser(dto);
+    @PostMapping("/save")
+    public void saveUser(@RequestBody UserDTO dto){
+         userService.saveUser(dto);
     }
 
     @GetMapping
