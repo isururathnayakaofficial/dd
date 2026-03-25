@@ -1,12 +1,11 @@
 package org.example.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +18,8 @@ public class Pond {
     private String location;
     private String size;
     private String type;
+
+    @OneToMany(mappedBy = "pond", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Fish> fishes;
+
 }

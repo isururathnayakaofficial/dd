@@ -1,9 +1,6 @@
 package org.example.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -15,5 +12,8 @@ public class Fish {
     private String name;
     private String type;
     private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "pond_id")
+    private Pond pond;
 
 }
