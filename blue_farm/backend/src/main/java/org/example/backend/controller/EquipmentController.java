@@ -28,10 +28,9 @@ public class EquipmentController {
         return equipmentService.getAllEquipment();
     }
 
-    @PutMapping("/{id}")
-    public EquipmentDto updateEquipment(@PathVariable Long id,
-                                        @RequestBody EquipmentDto dto){
-        return equipmentService.updateEquipment(id, dto);
+    @PutMapping("/update/{id}")
+    public void updateEquipment(@PathVariable Long id ,@RequestBody EquipmentDTO dto){
+        equipmentService.updateEquipment(id, dto);
     }
 
     @DeleteMapping("/{id}")
