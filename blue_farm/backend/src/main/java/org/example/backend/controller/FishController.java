@@ -4,12 +4,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.dto.FishDTO;
 import org.example.backend.dto.impl.FishDto;
+import org.example.backend.entity.Fish;
 import org.example.backend.service.FishService;
 import org.example.backend.util.APIResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,11 +35,11 @@ public class FishController {
                 ));
     }
 
-    @PutMapping
-    public ResponseEntity<APIResponse<String>> updateFish(
-            @RequestBody @Valid FishDto fishDto) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<APIResponse<String>> updateFish(@PathVariable long id,
+            @RequestBody @Valid FishDTO fishDto) {
 
-        fishService.updateFish(fishDto);  // ← getId() remove, dto only pass
+        fishService.updateFish(fishDto,id);  // ← getId() remove, dto only pass
 
         return ResponseEntity.ok(
                 new APIResponse<>(
@@ -65,10 +64,10 @@ public class FishController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<APIResponse<FishDto>> getFish(
+    public ResponseEntity<APIResponse<Fish>> getFish(
             @PathVariable Long id) {
 
-        FishDto fish = fishService.getFish(id);
+        Fish fish = fishService.getFish(id);
 
         return ResponseEntity.ok(
                 new APIResponse<>(
@@ -79,7 +78,7 @@ public class FishController {
         );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<APIResponse<String>> deleteFish(
             @PathVariable Long id) {
 

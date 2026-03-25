@@ -37,17 +37,14 @@ public class FishServiceImpl implements FishService {
     }
 
     @Override
-    public void updateFish(FishDto dto) {
+    public void updateFish(FishDTO dto,Long id) {
 
         if (dto == null) {
             throw new BadRequestException("Request body is missing");
         }
 
-        if (dto.getId() == null) {
-            throw new BadRequestException("Fish ID is required for update");
-        }
 
-        Fish existing = fishRepo.findById(dto.getId())
+        Fish existing = fishRepo.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Fish not found")
                 );
@@ -69,14 +66,15 @@ public class FishServiceImpl implements FishService {
     }
 
     @Override
-    public FishDto getFish(Long id) {
+    public Fish getFish(Long id) {
 
         Fish fish = fishRepo.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Fish not found")
                 );
 
-        return modelMapper.map(fish, FishDto.class);
+        fishRepo.delete(fish);
+        return fish;
     }
 
     @Override
