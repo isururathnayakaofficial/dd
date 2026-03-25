@@ -1,6 +1,8 @@
 package org.example.backend.service.impl;
 
-import org.example.backend.dto.impl.BoatDto;
+import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.BoatDTO;
+import org.example.backend.entity.Boat;
 import org.example.backend.entity.impl.BoatEntity;
 import org.example.backend.repository.BoatRepo;
 import org.example.backend.service.BoatService;
@@ -10,17 +12,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class BoatServiceImpl implements BoatService {
 
     private final BoatRepo boatRepo;
 
-    public BoatServiceImpl(BoatRepo boatRepo){
-        this.boatRepo = boatRepo;
-    }
+
 
     @Override
-    public BoatDto saveBoat(BoatDto dto) {
-
+    public void saveBoat(BoatDTO dto) {
         BoatEntity entity = new BoatEntity();
         entity.setName(dto.getName());
         entity.setType(dto.getType());
@@ -28,18 +28,14 @@ public class BoatServiceImpl implements BoatService {
 
         boatRepo.save(entity);
 
-        dto.setId(entity.getId());
-
-        return dto;
     }
 
     @Override
-    public List<BoatDto> getAllBoats() {
+    public List<BoatDTO> getAllBoats() {
 
         return boatRepo.findAll().stream().map(b -> {
 
-            BoatDto dto = new BoatDto();
-            dto.setId(b.getId());
+            BoatDTO dto = new BoatDTO();
             dto.setName(b.getName());
             dto.setType(b.getType());
             dto.setCapacity(b.getCapacity());
@@ -50,7 +46,7 @@ public class BoatServiceImpl implements BoatService {
     }
 
     @Override
-    public BoatDto updateBoat(Long id, BoatDto dto) {
+    public BoatDTO updateBoat(Long id, BoatDTO dto) {
 
         BoatEntity entity = boatRepo.findById(id).orElseThrow();
 
@@ -60,7 +56,7 @@ public class BoatServiceImpl implements BoatService {
 
         boatRepo.save(entity);
 
-        dto.setId(entity.getId());
+
 
         return dto;
     }

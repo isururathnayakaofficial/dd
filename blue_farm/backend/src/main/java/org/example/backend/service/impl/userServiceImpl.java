@@ -17,7 +17,6 @@ public class userServiceImpl implements userService {
 
     private final userRepo userRepository;
     private final PasswordEncoder passwordEncoder;
-
     @Override
     public userDto saveUser(userDto dto) {
 

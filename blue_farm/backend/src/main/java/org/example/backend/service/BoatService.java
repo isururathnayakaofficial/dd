@@ -1,16 +1,17 @@
 package org.example.backend.service;
 
-import org.example.backend.dto.impl.BoatDto;
+import org.example.backend.dto.BoatDTO;
+import org.example.backend.entity.Boat;
 
 import java.util.List;
 
 public interface BoatService {
 
-    BoatDto saveBoat(BoatDto dto);
+    void saveBoat(BoatDTO boatDTO);
 
-    List<BoatDto> getAllBoats();
+    List<BoatDTO> getAllBoats();
 
-    BoatDto updateBoat(Long id, BoatDto dto);
+    BoatDTO updateBoat(Long id, BoatDTO dto);
 
     void deleteBoat(Long id);
 }

@@ -1,13 +1,14 @@
 package org.example.backend.controller;
 
-import org.example.backend.dto.impl.BoatDto;
+import org.example.backend.dto.BoatDTO;
+import org.example.backend.entity.Boat;
 import org.example.backend.service.BoatService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/boat")
+@RequestMapping("/api/boat")
 @CrossOrigin
 public class BoatController {
 
@@ -18,18 +19,18 @@ public class BoatController {
     }
 
     @PostMapping("/save")
-    public BoatDto saveBoat(@RequestBody BoatDto dto){
-        return boatService.saveBoat(dto);
+    public void saveBoat(@RequestBody BoatDTO dto){
+       boatService.saveBoat(dto);
     }
 
     @GetMapping
-    public List<BoatDto> getAllBoats(){
+    public List<BoatDTO> getAllBoats(){
         return boatService.getAllBoats();
     }
 
     @PutMapping("/{id}")
-    public BoatDto updateBoat(@PathVariable Long id,
-                              @RequestBody BoatDto dto){
+    public BoatDTO updateBoat(@PathVariable Long id,
+                              @RequestBody BoatDTO dto){
         return boatService.updateBoat(id, dto);
     }
 
