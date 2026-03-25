@@ -1,8 +1,9 @@
 package org.example.backend.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.FishDTO;
 import org.example.backend.dto.impl.FishDto;
-import org.example.backend.entity.impl.FishEntity;
+import org.example.backend.entity.Fish;
 import org.example.backend.exception.BadRequestException;
 import org.example.backend.exception.ResourceNotFoundException;
 import org.example.backend.repository.FishRepo;
@@ -23,13 +24,16 @@ public class FishServiceImpl implements FishService {
     private final ModelMapper modelMapper;
 
     @Override
-    public void saveFish(FishDto dto) {
+    public void saveFish(FishDTO dto) {
 
         if (dto == null) {
             throw new BadRequestException("Request body is missing");
         }
-
-        fishRepo.save(modelMapper.map(dto, FishEntity.class));
+        Fish fish =new Fish();
+        fish.setName(dto.getName());
+        fish.setType(dto.getType());
+        fish.setQuantity(dto.getQuantity());
+        fishRepo.save(fish);
     }
 
     @Override
@@ -43,7 +47,7 @@ public class FishServiceImpl implements FishService {
             throw new BadRequestException("Fish ID is required for update");
         }
 
-        FishEntity existing = fishRepo.findById(dto.getId())
+        Fish existing = fishRepo.findById(dto.getId())
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Fish not found")
                 );
@@ -56,7 +60,7 @@ public class FishServiceImpl implements FishService {
     @Override
     public List<FishDto> getAllFish() {
 
-        List<FishEntity> fishList = fishRepo.findAll();
+        List<Fish> fishList = fishRepo.findAll();
 
         return modelMapper.map(
                 fishList,
@@ -67,7 +71,7 @@ public class FishServiceImpl implements FishService {
     @Override
     public FishDto getFish(Long id) {
 
-        FishEntity fish = fishRepo.findById(id)
+        Fish fish = fishRepo.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Fish not found")
                 );

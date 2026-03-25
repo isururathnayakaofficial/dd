@@ -1,7 +1,7 @@
 package org.example.backend.repository;
 
-import org.example.backend.entity.impl.FishEntity;
+import org.example.backend.entity.Fish;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FishRepo extends JpaRepository<FishEntity,Long> {
+public interface FishRepo extends JpaRepository<Fish,Long> {
 }

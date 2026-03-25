@@ -2,6 +2,7 @@ package org.example.backend.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.FishDTO;
 import org.example.backend.dto.impl.FishDto;
 import org.example.backend.service.FishService;
 import org.example.backend.util.APIResponse;
@@ -17,14 +18,13 @@ import java.util.List;
 @RequestMapping("/app/v1/fish")
 @CrossOrigin
 @RequiredArgsConstructor
-@Validated
 public class FishController {
 
     private final FishService fishService;
 
     @PostMapping("/save")
     public ResponseEntity<APIResponse<String>> saveFish(
-            @RequestBody  FishDto fishDto) {
+            @RequestBody FishDTO fishDto) {
 
         fishService.saveFish(fishDto);
 
