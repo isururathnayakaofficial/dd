@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.EquipmentDTO;
 import org.example.backend.dto.impl.EquipmentDto;
 import org.example.backend.service.EquipmentService;
 
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/equipment")
+@RequestMapping("/api/equipment")
 @RequiredArgsConstructor
 @CrossOrigin
 public class EquipmentController {
@@ -17,9 +18,9 @@ public class EquipmentController {
 
     private final EquipmentService equipmentService;
 
-    @PostMapping
-    public EquipmentDto saveEquipment(@RequestBody EquipmentDto dto){
-        return equipmentService.saveEquipment(dto);
+    @PostMapping("/save")
+    public void saveEquipment(@RequestBody EquipmentDTO dto){
+        equipmentService.saveEquipment(dto);
     }
 
     @GetMapping

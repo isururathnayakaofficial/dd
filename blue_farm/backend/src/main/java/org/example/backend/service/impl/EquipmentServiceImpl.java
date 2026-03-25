@@ -2,6 +2,7 @@ package org.example.backend.service.impl;
 
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.EquipmentDTO;
 import org.example.backend.dto.impl.EquipmentDto;
 import org.example.backend.entity.impl.EquipmentEntity;
 import org.example.backend.repository.EquipmentRepo;
@@ -20,18 +21,15 @@ public class EquipmentServiceImpl implements EquipmentService {
 
 
     @Override
-    public EquipmentDto saveEquipment(EquipmentDto dto) {
+    public void saveEquipment(EquipmentDTO dto) {
 
         EquipmentEntity entity = new EquipmentEntity();
         entity.setName(dto.getName());
         entity.setType(dto.getType());
         entity.setQuantity(dto.getQuantity());
 
-        entity = equipmentRepo.save(entity);
+        equipmentRepo.save(entity);
 
-        dto.setId(entity.getId());
-
-        return dto;
     }
 
     @Override
