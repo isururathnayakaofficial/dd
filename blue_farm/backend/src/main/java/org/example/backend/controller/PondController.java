@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.PondDTO;
 import org.example.backend.dto.impl.PondDto;
 import org.example.backend.service.PondService;
 import org.springframework.web.bind.annotation.*;
@@ -8,16 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pond")
+@RequestMapping("/api/pond")
 @RequiredArgsConstructor
 @CrossOrigin
 public class PondController {
 
     private final PondService pondService;
 
-    @PostMapping
-    public PondDto savePond(@RequestBody PondDto dto){
-        return pondService.savePond(dto);
+    @PostMapping("/save")
+    public void savePond(@RequestBody PondDTO dto){
+        pondService.savePond(dto);
     }
 
     @GetMapping
@@ -25,10 +26,10 @@ public class PondController {
         return pondService.getAllPonds();
     }
 
-    @PutMapping("/{id}")
-    public PondDto updatePond(@PathVariable Long id,
-                              @RequestBody PondDto dto){
-        return pondService.updatePond(id, dto);
+    @PutMapping("/update/{id}")
+    public void updatePond(@PathVariable Long id,
+                              @RequestBody PondDTO dto){
+        pondService.updatePond(id, dto);
     }
 
     @DeleteMapping("/{id}")
