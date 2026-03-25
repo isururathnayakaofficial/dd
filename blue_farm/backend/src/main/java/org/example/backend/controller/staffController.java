@@ -31,7 +31,7 @@ public class staffController {
        staffService.updateStaff(id,dto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteStaff(@PathVariable Long id){
         staffService.deleteStaff(id);
     }
