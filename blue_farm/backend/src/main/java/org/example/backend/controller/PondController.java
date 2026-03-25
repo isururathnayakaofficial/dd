@@ -32,7 +32,7 @@ public class PondController {
         pondService.updatePond(id, dto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deletePond(@PathVariable Long id){
         pondService.deletePond(id);
     }
