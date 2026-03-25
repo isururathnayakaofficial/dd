@@ -28,10 +28,11 @@ public class BoatController {
         return boatService.getAllBoats();
     }
 
-    @PutMapping("/{id}")
-    public BoatDTO updateBoat(@PathVariable Long id,
+    @PutMapping("/update/{id}")
+    public void updateBoat(@PathVariable Long id,
                               @RequestBody BoatDTO dto){
-        return boatService.updateBoat(id, dto);
+        boatService.updateBoat(id, dto);
+
     }
 
     @DeleteMapping("/{id}")

@@ -46,7 +46,7 @@ public class BoatServiceImpl implements BoatService {
     }
 
     @Override
-    public BoatDTO updateBoat(Long id, BoatDTO dto) {
+    public void updateBoat(Long id, BoatDTO dto) {
 
         BoatEntity entity = boatRepo.findById(id).orElseThrow();
 
@@ -55,10 +55,6 @@ public class BoatServiceImpl implements BoatService {
         entity.setCapacity(dto.getCapacity());
 
         boatRepo.save(entity);
-
-
-
-        return dto;
     }
 
     @Override

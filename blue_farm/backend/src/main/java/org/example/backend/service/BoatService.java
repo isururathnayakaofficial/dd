@@ -11,7 +11,7 @@ public interface BoatService {
 
     List<BoatDTO> getAllBoats();
 
-    BoatDTO updateBoat(Long id, BoatDTO dto);
+    void updateBoat(Long id, BoatDTO dto);
 
     void deleteBoat(Long id);
 }
